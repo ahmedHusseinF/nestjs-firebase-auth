@@ -52,12 +52,15 @@ export class FirebaseStrategy extends PassportStrategy(FirebaseAuthStrategy, 'fi
   public constructor() {
     super({
       extractor: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      checkRevoked: true   // defaults to false
     });
   }
 }
 ```
 
 Note: You should provide an extractor. More information about passport-jwt extractors you can find here: [http://www.passportjs.org/packages/passport-jwt/#included-extractors](http://www.passportjs.org/packages/passport-jwt/#included-extractors)
+
+Note: You can pass a boolean to indicate whether you need to check the token for revocation. see the firebase [docs](https://firebase.google.com/docs/reference/admin/node/admin.auth.Auth#verifyidtoken) about the verification function.
 
 # Create `AuthModule` and provide created strategy
 
